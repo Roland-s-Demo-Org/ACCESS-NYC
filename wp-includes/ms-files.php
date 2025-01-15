@@ -89,5 +89,8 @@ if ( ( $client_last_modified && $client_etag )
 }
 
 // If we made it this far, just serve the file.
+if (mb_strpos($file, '../') !== false || mb_strpos($file, '..\\') !== false) {
+    throw new \Exception('Invalid file path');
+}
 readfile( $file );
 flush();
