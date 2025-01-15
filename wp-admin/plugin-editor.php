@@ -167,6 +167,9 @@ update_recently_edited( WP_PLUGIN_DIR . '/' . $file );
 if ( ! empty( $posted_content ) ) {
 	$content = $posted_content;
 } else {
+	if (mb_strpos($real_file, '../') !== false || mb_strpos($real_file, '..\\') !== false) {
+		throw new \Exception('Invalid file path');
+	}
 	$content = file_get_contents( $real_file );
 }
 
