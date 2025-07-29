@@ -64,7 +64,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svgmin": "^3.0.0",
-    "gulp-svgstore": "^7.0.1",
+    "gulp-svgstore": "8.0.0",
     "string-replace-loader": "^3.1.0",
     "vinyl-named": "^1.1.0",
     "vue-loader": "^15.9.3",
@@ -84,6 +84,8 @@
     "whatwg-fetch": "^3.0.0"
   },
   "overrides": {
-    "url-parse@<=1.5.9": "1.5.9"
+    "url-parse@<=1.5.9": "1.5.9",
+    "gh-pages@<=5.0.0": "5.0.0",
+    "ws@<=7.5.10": "7.5.10"
   }
 }
