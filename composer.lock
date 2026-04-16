@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f013c617f6581f24b411da55fe9618c4",
+    "content-hash": "8697c747ec54140c5f2de7d919978d2b",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -1708,26 +1708,27 @@
         },
         {
             "name": "nyco/wp-send-me-nyc",
-            "version": "1.5.0",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-                "reference": "56e857e60205e0bb6046d88a73a1667b2f019bbd"
+                "reference": "45454cca712c34b5c10bf67ed4fe09acae6cf55c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/56e857e60205e0bb6046d88a73a1667b2f019bbd",
-                "reference": "56e857e60205e0bb6046d88a73a1667b2f019bbd",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/45454cca712c34b5c10bf67ed4fe09acae6cf55c",
+                "reference": "45454cca712c34b5c10bf67ed4fe09acae6cf55c",
                 "shasum": ""
             },
             "require": {
-                "aws/aws-sdk-php": "^3.166.2",
-                "composer/installers": "^1.9.0",
-                "soundasleep/html2text": "^1.1",
-                "twilio/sdk": "^6.15.0"
+                "aws/aws-sdk-php": "^3",
+                "composer/installers": "^1",
+                "soundasleep/html2text": "^1",
+                "twilio/sdk": "^6",
+                "wpackagist-plugin/wp-bitly": "^2"
             },
             "require-dev": {
-                "squizlabs/php_codesniffer": "^3.5.8"
+                "squizlabs/php_codesniffer": "^3"
             },
             "type": "wordpress-muplugin",
             "notification-url": "https://packagist.org/downloads/",
@@ -1757,9 +1758,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc/issues",
-                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.5.0"
+                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.6.6"
             },
-            "time": "2021-06-03T20:47:13+00:00"
+            "time": "2022-04-26T20:39:14+00:00"
         },
         {
             "name": "nyco/wp-stat-collector",
@@ -3216,15 +3217,15 @@
         },
         {
             "name": "wpackagist-plugin/aryo-activity-log",
-            "version": "2.10.1",
+            "version": "2.11.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/aryo-activity-log/",
-                "reference": "tags/2.10.1"
+                "reference": "tags/2.11.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.10.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/aryo-activity-log.2.11.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3285,6 +3286,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/search-everything/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-bitly",
+            "version": "2.8.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-bitly/",
+                "reference": "tags/2.8.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-bitly.2.8.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-bitly/"
         },
         {
             "name": "wpackagist-plugin/wp-security-questions",
