@@ -2186,12 +2186,21 @@ class SitePress extends WPML_WPDB_User implements
 				?>
 				<p>
 					<?php
+					// Prepare toggle link data for system fields visibility
 					$toggle_system_fields = array(
 						'url'  => add_query_arg( array( 'show_system_fields' => ! $settings_factory->show_system_fields ) ),
+						// Translatable text: dynamically set based on current visibility state
 						'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
 					);
 					?>
-					<a href="<?php echo esc_url( $toggle_system_fields['url'] ); ?>"><?php echo $toggle_system_fields['text']; ?></a>
+					<!-- XSS mitigation: htmlentities() applied to prevent potential cross-site scripting attacks on translated text -->
+					<a href="<?php echo esc_url( $toggle_system_fields['url'] ); ?>">
+						<?php
+						// Security fix: Escape translated text with htmlentities() to prevent XSS
+						// Using ENT_QUOTES to encode both single and double quotes
+						echo htmlentities($toggle_system_fields['text'], ENT_QUOTES);
+						?>
+					</a>
 				</p>
 				<?php
 
