@@ -2191,7 +2191,7 @@ class SitePress extends WPML_WPDB_User implements
 						'text' => $settings_factory->show_system_fields ? __( 'Hide system fields', 'sitepress' ) : __( 'Show system fields', 'sitepress' ),
 					);
 					?>
-					<a href="<?php echo esc_url( $toggle_system_fields['url'] ); ?>"><?php echo $toggle_system_fields['text']; ?></a>
+					<a href="<?php echo esc_url( $toggle_system_fields['url'] ); ?>"><?php echo htmlentities($toggle_system_fields['text'], ENT_QUOTES); ?></a>
 				</p>
 				<?php
 
