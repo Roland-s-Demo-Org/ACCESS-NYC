@@ -87,6 +87,10 @@ class WPML_TM_ICL_Translate_Job {
 			return null;
 		}
 
+		if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $column ) ) {
+			return null;
+		}
+
 		$wpdb = $this->tm_records->wpdb();
 
 		$query   = ' SELECT ' . $column . " FROM {$wpdb->prefix}{$this->table} WHERE job_id = %d LIMIT 1";

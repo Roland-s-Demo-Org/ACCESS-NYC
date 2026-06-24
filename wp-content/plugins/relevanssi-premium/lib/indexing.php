@@ -887,7 +887,7 @@ function relevanssi_insert_edit( $post_id ) {
 		// Check the indexing restriction filter: if the post passes the filter, this
 		// should return the post ID.
 		$is_unrestricted = $wpdb->get_var(
-			"SELECT ID FROM $wpdb->posts AS post WHERE ID = $post_id {$restriction['mysql']}" // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$wpdb->prepare( "SELECT ID FROM $wpdb->posts AS post WHERE ID = %d {$restriction['mysql']}", $post_id ) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		);
 		if ( ! $is_unrestricted ) {
 			$index_this_post = false;
