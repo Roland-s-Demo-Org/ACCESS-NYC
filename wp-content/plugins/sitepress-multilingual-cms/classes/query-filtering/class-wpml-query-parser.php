@@ -413,6 +413,9 @@ class WPML_Query_Parser {
 
 			if ( $post_type ) {
 				$first_post_type = reset( $post_type );
+				if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $first_post_type ) ) {
+					return $q;
+				}
 
 				if ( $this->sitepress->is_translated_post_type( $first_post_type ) && ! empty( $q->query_vars['name'] ) ) {
 					if ( is_post_type_hierarchical( $first_post_type ) ) {

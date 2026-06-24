@@ -2167,6 +2167,9 @@ function wp_get_archives( $args = '' ) {
 		}
 	} elseif ( ( 'postbypost' === $parsed_args['type'] ) || ( 'alpha' === $parsed_args['type'] ) ) {
 		$orderby = ( 'alpha' === $parsed_args['type'] ) ? 'post_title ASC ' : 'post_date DESC, ID DESC ';
+		if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', trim( str_replace( array( ' ', ',', 'ASC', 'DESC' ), '', $orderby ) ) ) ) {
+			return;
+		}
 		$query   = "SELECT * FROM $wpdb->posts $join $where ORDER BY $orderby $limit";
 		$key     = md5( $query );
 		$key     = "wp_get_archives:$key:$last_changed";

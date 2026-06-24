@@ -1137,6 +1137,10 @@ function relevanssi_common_words( $limit = 25, $wp_cli = false ) {
 		$limit = 25;
 	}
 
+	if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $relevanssi_variables['relevanssi_table'] ) ) {
+		return array();
+	}
+
 	$words = $wpdb->get_results( 'SELECT COUNT(*) as cnt, term FROM ' . $relevanssi_variables['relevanssi_table'] . " GROUP BY term ORDER BY cnt DESC LIMIT $limit" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQL.NotPrepared
 
 	if ( ! $wp_cli ) {

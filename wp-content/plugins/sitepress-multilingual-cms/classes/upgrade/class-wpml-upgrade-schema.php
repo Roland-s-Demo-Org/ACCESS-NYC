@@ -114,10 +114,15 @@ class WPML_Upgrade_Schema {
 	 */
 	public function get_column_collation( $table_name, $column_name ) {
 		return $this->wpdb->get_var(
-			"SELECT COLLATION_NAME FROM INFORMATION_SCHEMA.COLUMNS
-			 WHERE TABLE_SCHEMA = '{$this->wpdb->dbname}'
-			 	AND TABLE_NAME = '{$this->wpdb->prefix}{$table_name}'
-			 	AND COLUMN_NAME = '{$column_name}'"
+			$this->wpdb->prepare(
+				"SELECT COLLATION_NAME FROM INFORMATION_SCHEMA.COLUMNS
+				 WHERE TABLE_SCHEMA = %s
+				 	AND TABLE_NAME = %s
+				 	AND COLUMN_NAME = %s",
+				$this->wpdb->dbname,
+				$this->wpdb->prefix . $table_name,
+				$column_name
+			)
 		);
 	}
 

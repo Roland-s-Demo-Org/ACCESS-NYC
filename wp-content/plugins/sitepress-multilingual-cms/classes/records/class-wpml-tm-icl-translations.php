@@ -167,10 +167,11 @@ class WPML_TM_ICL_Translations extends WPML_TM_Record_User {
 
 		$this->fields[ $field ] = isset( $this->fields[ $field ] ) ? $this->fields[ $field ] : $this->wpdb->get_var(
 			$this->wpdb->prepare(
-				" SELECT {$field}
+				" SELECT %i
 										FROM {$this->wpdb->prefix}{$this->table}
 										WHERE translation_id = %d
 										LIMIT 1",
+				$field,
 				$this->translation_id
 			)
 		);
