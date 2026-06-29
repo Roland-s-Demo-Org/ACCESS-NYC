@@ -424,16 +424,16 @@ class WPML_Query_Parser {
 							$q->query_vars[ $first_post_type ] = '';
 						}
 					} else {
-						$pid_prepared = $this->wpdb->prepare(
-							"
-							SELECT ID FROM {$this->wpdb->posts} p
-							JOIN {$this->wpdb->prefix}icl_translations t
-								ON t.element_id = p.ID AND t.element_type='post_{$first_post_type}'
-							WHERE post_name=%s AND post_type=%s AND t.language_code=%s
-							LIMIT 1
-						",
-							array( $q->query_vars['name'], $first_post_type, $current_language )
-						);
+					$pid_prepared = $this->wpdb->prepare(
+						"
+						SELECT ID FROM {$this->wpdb->posts} p
+						JOIN {$this->wpdb->prefix}icl_translations t
+							ON t.element_id = p.ID AND t.element_type=%s
+						WHERE post_name=%s AND post_type=%s AND t.language_code=%s
+						LIMIT 1
+					",
+						array( 'post_' . $first_post_type, $q->query_vars['name'], $first_post_type, $current_language )
+					);
 						$pid          = $this->wpdb->get_var( $pid_prepared );
 						if ( ! empty( $pid ) ) {
 							$q->query_vars['p'] = $this->post_translations->element_id_in( $pid, $current_language, true );

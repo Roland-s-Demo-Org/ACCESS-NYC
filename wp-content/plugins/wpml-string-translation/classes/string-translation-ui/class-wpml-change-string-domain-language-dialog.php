@@ -99,6 +99,11 @@ class WPML_Change_String_Domain_Language_Dialog extends WPML_WPDB_And_SP_User {
 		$package_translation->change_language_of_strings_in_domain( $domain, $langs, $to_lang );
 
 		if ( ! empty( $langs ) ) {
+			foreach ( $langs as $lang ) {
+				if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $lang ) ) {
+					return array( 'success' => false );
+				}
+			}
 			foreach ( $langs as &$lang ) {
 				$lang = "'" . $lang . "'";
 			}

@@ -315,6 +315,10 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 	private function get_iclt_field( $field_name, $translation ) {
 		global $wpdb;
 
+		if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $field_name ) ) {
+			return null;
+		}
+
 		$column_name = ( $translation === true ? 'i' : 'o' ) . '.' . $field_name;
 
 		$query          = "	SELECT {$column_name}

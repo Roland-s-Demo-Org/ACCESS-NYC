@@ -2676,6 +2676,9 @@ class wpdb {
 	 * @return int|false The number of rows updated, or false on error.
 	 */
 	public function update( $table, $data, $where, $format = null, $where_format = null ) {
+		if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $table ) ) {
+			return false;
+		}
 		if ( ! is_array( $data ) || ! is_array( $where ) ) {
 			return false;
 		}
