@@ -34,6 +34,9 @@ function relevanssi_populate_stopwords( $verbose = false, string $stopword_table
 	if ( empty( $stopword_table ) ) {
 		$stopword_table = $relevanssi_variables['stopword_table'];
 	}
+	if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $stopword_table ) ) {
+		return;
+	}
 	$stopwords_from_table = $wpdb->get_col( "SELECT * FROM $stopword_table" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	if ( count( $stopwords_from_table ) > 1 ) {
 		array_walk( $stopwords_from_table, 'relevanssi_add_single_stopword' );

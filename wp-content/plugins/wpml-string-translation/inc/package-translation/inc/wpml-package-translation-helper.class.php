@@ -464,6 +464,10 @@ class WPML_Package_Helper {
 	private function get_editor_string_element( $string_name, $package_id, $column ) {
 		global $wpdb;
 
+		if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', $column ) ) {
+			return null;
+		}
+
 		$element_query    = 'SELECT ' . $column . "
 						FROM {$wpdb->prefix}icl_strings
 						WHERE string_package_id=%d AND name=%s";
