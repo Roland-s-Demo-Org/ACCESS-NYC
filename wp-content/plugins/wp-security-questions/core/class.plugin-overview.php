@@ -162,7 +162,7 @@ if ( ! class_exists( 'Flippercode_Product_Overview' ) ) {
 			$plugin_updates = unserialize( get_option('fc_'.$this->productSlug ) );
 		
 			?>
-			<div class="<?php echo $skin; ?> flippercode-ui fcdoc-product-info" data-current-product=<?php echo $this->productTextDomain; ?> data-current-product-slug=<?php echo $this->productSlug; ?> data-product-version = <?php echo $this->productVersion; ?> data-product-name = "<?php echo $this->productName; ?>" >
+			<div class="<?php echo htmlentities($skin, ENT_QUOTES); ?> flippercode-ui fcdoc-product-info" data-current-product=<?php echo $this->productTextDomain; ?> data-current-product-slug=<?php echo $this->productSlug; ?> data-product-version = <?php echo $this->productVersion; ?> data-product-name = "<?php echo $this->productName; ?>" >
 			<div class="fc-main">	
 			<div class="fc-container">
 		        <div class="fc-divider"><div class="fc-8"><div class="fc-divider">
