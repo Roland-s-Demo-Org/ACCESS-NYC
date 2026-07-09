@@ -37,7 +37,7 @@
     }
   ],
   "require": {
-    "aws/aws-sdk-php": "^3",
+    "aws/aws-sdk-php": ">=3.211.0",
     "composer/installers": "^1",
     "soundasleep/html2text": "^1",
     "twilio/sdk": "^6",
