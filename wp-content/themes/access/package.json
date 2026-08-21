@@ -84,6 +84,8 @@
     "whatwg-fetch": "^3.0.0"
   },
   "overrides": {
-    "url-parse@<=1.5.9": "1.5.9"
+    "url-parse@<=1.5.9": "1.5.9",
+    "body-parser@<1.20.5": "1.20.5",
+    "express@<4.22.2": "4.22.2"
   }
 }
