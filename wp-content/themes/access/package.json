@@ -84,6 +84,27 @@
     "whatwg-fetch": "^3.0.0"
   },
   "overrides": {
-    "url-parse@<=1.5.9": "1.5.9"
+    "url-parse@<=1.5.9": "1.5.9",
+    "babel-loader": {
+      "loader-utils": "https://npm.aikido.io/d31fc8ec94e6da07d30/loader-utils@1.4.0-aikido.1"
+    },
+    "vue-loader": {
+      "loader-utils": "https://npm.aikido.io/d31fc8ec94e6da07d30/loader-utils@1.4.0-aikido.1"
+    },
+    "vue-style-loader": {
+      "loader-utils": "https://npm.aikido.io/d31fc8ec94e6da07d30/loader-utils@1.4.0-aikido.1"
+    },
+    "reload": {
+      "ws": "https://npm.aikido.io/d31fc8ec94e6da07d30/ws@7.3.1-aikido.2"
+    },
+    "puppeteer": {
+      "ws": "6.2.3"
+    },
+    "body-parser": {
+      "qs": "https://npm.aikido.io/d31fc8ec94e6da07d30/qs@6.7.0-aikido.2"
+    },
+    "express": {
+      "qs": "https://npm.aikido.io/d31fc8ec94e6da07d30/qs@6.7.0-aikido.2"
+    }
   }
 }
