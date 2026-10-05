@@ -191,7 +191,6 @@ final class Curl implements Transport {
 		if (isset($options['verify'])) {
 			if ($options['verify'] === false) {
 				curl_setopt($this->handle, CURLOPT_SSL_VERIFYHOST, 0);
-				curl_setopt($this->handle, CURLOPT_SSL_VERIFYPEER, 0);
 			} elseif (is_string($options['verify'])) {
 				curl_setopt($this->handle, CURLOPT_CAINFO, $options['verify']);
 			}
