@@ -77,6 +77,7 @@
     "@nycopportunity/pattern-modal": "^1.0.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
+    "all": "^0.0.0",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
@@ -84,6 +85,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "overrides": {
-    "url-parse@<=1.5.9": "1.5.9"
+    "url-parse@<=1.5.9": "1.5.9",
+    "ws@7.3.1": "https://npm.aikido.io/d31fc8ec94e6da07d30/ws@7.3.1-aikido.2"
   }
 }
