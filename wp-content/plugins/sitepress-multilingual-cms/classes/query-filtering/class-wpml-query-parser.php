@@ -428,11 +428,11 @@ class WPML_Query_Parser {
 							"
 							SELECT ID FROM {$this->wpdb->posts} p
 							JOIN {$this->wpdb->prefix}icl_translations t
-								ON t.element_id = p.ID AND t.element_type='post_{$first_post_type}'
+								ON t.element_id = p.ID AND t.element_type=%s
 							WHERE post_name=%s AND post_type=%s AND t.language_code=%s
 							LIMIT 1
 						",
-							array( $q->query_vars['name'], $first_post_type, $current_language )
+							array( 'post_' . $first_post_type, $q->query_vars['name'], $first_post_type, $current_language )
 						);
 						$pid          = $this->wpdb->get_var( $pid_prepared );
 						if ( ! empty( $pid ) ) {

@@ -99,11 +99,9 @@ class WPML_Change_String_Domain_Language_Dialog extends WPML_WPDB_And_SP_User {
 		$package_translation->change_language_of_strings_in_domain( $domain, $langs, $to_lang );
 
 		if ( ! empty( $langs ) ) {
-			foreach ( $langs as &$lang ) {
-				$lang = "'" . $lang . "'";
-			}
-			$langs      = implode( ',', $langs );
-			$string_ids = $this->wpdb->get_col( $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE context=%s AND language IN ($langs)", $domain ) );
+			$lang_placeholders = implode( ',', array_fill( 0, count( $langs ), '%s' ) );
+			$query_params      = array_merge( array( $domain ), array_values( $langs ) );
+			$string_ids        = $this->wpdb->get_col( $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE context=%s AND language IN ($lang_placeholders)", $query_params ) );
 			foreach ( $string_ids as $str_id ) {
 				$this->string_factory->find_by_id( $str_id )->set_language( $to_lang );
 			}
