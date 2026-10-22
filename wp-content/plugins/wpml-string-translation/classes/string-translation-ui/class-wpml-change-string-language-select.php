@@ -46,10 +46,12 @@ class WPML_Change_String_Language_Select {
 		$response            = $package_translation->change_language_of_strings( $strings, $lang );
 
 		if ( $response['success'] ) {
-			$strings_in     = implode( ',', $strings );
-			$update_query   = "UPDATE {$this->wpdb->prefix}icl_strings SET language=%s WHERE id IN ($strings_in)";
-			$update_prepare = $this->wpdb->prepare( $update_query, $lang );
-			$this->wpdb->query( $update_prepare );
+			if ( ! empty( $strings ) ) {
+				$strings_in     = implode( ',', array_fill( 0, count( $strings ), '%d' ) );
+				$update_query   = "UPDATE {$this->wpdb->prefix}icl_strings SET language=%s WHERE id IN ($strings_in)";
+				$update_prepare = $this->wpdb->prepare( $update_query, array_merge( array( $lang ), array_values( $strings ) ) );
+				$this->wpdb->query( $update_prepare );
+			}
 
 			$response['success'] = true;
 
