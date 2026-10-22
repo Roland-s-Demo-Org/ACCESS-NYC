@@ -165,6 +165,10 @@ class WPML_TM_ICL_Translations extends WPML_TM_Record_User {
 
 	private function select_field( $field ) {
 
+		if ( ! is_string( $field ) || ! preg_match( '/^[a-zA-Z0-9_]+$/', $field ) ) {
+			throw new \InvalidArgumentException( 'Invalid input' );
+		}
+
 		$this->fields[ $field ] = isset( $this->fields[ $field ] ) ? $this->fields[ $field ] : $this->wpdb->get_var(
 			$this->wpdb->prepare(
 				" SELECT {$field}

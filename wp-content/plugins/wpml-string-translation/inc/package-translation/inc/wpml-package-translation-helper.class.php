@@ -624,10 +624,14 @@ class WPML_Package_Helper {
 
 		$all_ok = true;
 
-		$strings_in = implode( ',', $strings );
+		$strings_in = implode( ',', array_fill( 0, count( $strings ), '%d' ) );
 
-		$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE id IN ($strings_in)";
-		$package_ids           = $wpdb->get_col( $string_packages_query );
+		if ( $strings ) {
+			$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE id IN ($strings_in)";
+			$package_ids           = $wpdb->get_col( $wpdb->prepare( $string_packages_query, array_values( $strings ) ) );
+		} else {
+			$package_ids = array();
+		}
 
 		foreach ( $package_ids as $package_id ) {
 			if ( $package_id ) {
