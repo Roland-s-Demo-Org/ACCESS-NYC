@@ -1825,7 +1825,7 @@ class getID3
 				} else {
 
 					$commandline = 'vorbiscomment -w -c '.escapeshellarg($empty).' '.escapeshellarg($file).' '.escapeshellarg($temp).' 2>&1';
-					$VorbisCommentError = `$commandline`;
+					$VorbisCommentError = shell_exec($commandline);
 
 				}
 
