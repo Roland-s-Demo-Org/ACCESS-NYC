@@ -13,17 +13,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - uses: "shivammathur/setup-php@v2"
+    - uses: "shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962" # v2
       with:
         php-version: "7.4"
         extensions: pcov
     - name: Install dependencies
-      uses: ramsey/composer-install@v1
+      uses: ramsey/composer-install@994bb194a4fefcf39449ccf0f7766a4318f1ac76 # v1
       with:
         composer-options: '-oa --no-dev'
 
     - name: Archive assets
-      uses: thedoctor0/zip-release@master
+      uses: thedoctor0/zip-release@a24011d8d445e4da5935a7e73c1f98e22a439464 # master
       with:
         filename: 'manual-install.zip'
         exclusions: '*.git* *tests/ *tests/data/ *tests/* *tests/**/*'
@@ -31,7 +31,7 @@ jobs:
         directory: '.'
 
     - name: Upload zip to release
-      uses: AButler/upload-release-assets@v2.0
+      uses: AButler/upload-release-assets@ec6d3263266dc57eb6645b5f75e827987f7c217d # v2.0
       with:
         files: 'manual-install.zip'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
