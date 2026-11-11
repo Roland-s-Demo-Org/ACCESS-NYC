@@ -115,7 +115,7 @@ if ( isset( $_POST['action'] ) && $_POST['action'] == 'icl_admo_add_translations
         <form id="icl_admo_list" method="post" action="">
         <input type="hidden" name="action" value="icl_admo_add_translations" />
         <input type="hidden" name="language" value="<?php echo $language ?>" />
-        <input type="hidden" name="version" value="<?php echo $version ?>" />
+        <input type="hidden" name="version" value="<?php echo htmlentities($version, ENT_QUOTES) ?>" />
         <?php wp_nonce_field('icl_adm_save_translations'); ?>
         
         <?php if(!empty($translations['updated'])): ?>

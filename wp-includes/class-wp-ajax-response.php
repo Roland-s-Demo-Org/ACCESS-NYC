@@ -153,7 +153,7 @@ class WP_Ajax_Response {
 		header( 'Content-Type: text/xml; charset=' . get_option( 'blog_charset' ) );
 		echo "<?xml version='1.0' encoding='" . get_option( 'blog_charset' ) . "' standalone='yes'?><wp_ajax>";
 		foreach ( (array) $this->responses as $response ) {
-			echo $response;
+			echo htmlentities($response, ENT_QUOTES);
 		}
 		echo '</wp_ajax>';
 		if ( wp_doing_ajax() ) {
