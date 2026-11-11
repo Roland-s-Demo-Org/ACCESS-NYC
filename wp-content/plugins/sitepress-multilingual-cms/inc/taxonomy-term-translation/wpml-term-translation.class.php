@@ -267,6 +267,14 @@ class WPML_Term_Translation extends WPML_Element_Translation {
 	 * @return string
 	 */
 	protected function get_query_sql( $cols = 'wpml_translations.element_id, tax.term_id, tax.taxonomy' ) {
+		switch ( $cols ) {
+			case 'COUNT(tax.term_id) AS rowsCount':
+				$cols = 'COUNT(tax.term_id) AS rowsCount';
+				break;
+			default:
+				$cols = 'wpml_translations.element_id, tax.term_id, tax.taxonomy';
+				break;
+		}
 		$sql  = '';
 		$sql .= "SELECT {$cols} FROM {$this->wpdb->prefix}icl_translations wpml_translations" . $this->get_element_join();
 		$sql .= " JOIN {$this->wpdb->terms} terms";
