@@ -7,7 +7,7 @@
         <h1 class="c-header__descriptor text-blue-dark">{{ strings.PROGRAMS }}</h1>
 
         <h2 class="c-header__information text-grey-mid mb-0 list-inline-comma">
-          <span v-if="init" v-for="c in categories" v-html="c"></span> &nbsp;
+          <span v-if="init" v-for="c in categories" v-html="sanitizeHtml(c)"></span> &nbsp;
         </h2>
       </div>
     </header>
@@ -24,7 +24,7 @@
           <div class="sticky bottom-0 pb-2 text-center screen-desktop:hidden animated fadeInUpBig" v-if="filtering">
             <a class="btn btn-small btn-primary" href="#see-programs">
               <span v-if="none">{{ strings.NO_RESULTS }}</span>
-              <span v-else-if="!loading" v-html="'See ' + headers.total + ' Programs'">{{ strings.SEE_PROGRAMS }}</span>
+              <span v-else-if="!loading" v-html="sanitizeHtml('See ' + headers.total + ' Programs')">{{ strings.SEE_PROGRAMS }}</span>
               <span v-else>{{ strings.LOADING }}</span>
             </a>
           </div>
