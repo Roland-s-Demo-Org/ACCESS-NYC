@@ -624,10 +624,14 @@ class WPML_Package_Helper {
 
 		$all_ok = true;
 
-		$strings_in = implode( ',', $strings );
-
-		$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE id IN ($strings_in)";
-		$package_ids           = $wpdb->get_col( $string_packages_query );
+		if ( ! empty( $strings ) ) {
+			$strings_placeholders  = implode( ',', array_fill( 0, count( $strings ), '%d' ) );
+			$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE id IN ($strings_placeholders)";
+			$string_packages_query = $wpdb->prepare( $string_packages_query, array_values( $strings ) );
+			$package_ids           = $wpdb->get_col( $string_packages_query );
+		} else {
+			$package_ids = array();
+		}
 
 		foreach ( $package_ids as $package_id ) {
 			if ( $package_id ) {
@@ -656,13 +660,10 @@ class WPML_Package_Helper {
 		global $wpdb;
 
 		if ( ! empty( $langs ) ) {
-			foreach ( $langs as &$lang ) {
-				$lang = "'" . $lang . "'";
-			}
-			$langs = implode( ',', $langs );
+			$langs_placeholders = implode( ',', array_fill( 0, count( $langs ), '%s' ) );
 
-			$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE context='%s' AND language IN ($langs)";
-			$string_packages_query = $wpdb->prepare( $string_packages_query, $domain );
+			$string_packages_query = "SELECT DISTINCT string_package_id FROM {$wpdb->prefix}icl_strings WHERE context='%s' AND language IN ($langs_placeholders)";
+			$string_packages_query = $wpdb->prepare( $string_packages_query, array_merge( array( $domain ), array_values( $langs ) ) );
 			$package_ids           = $wpdb->get_col( $string_packages_query );
 
 			$this->set_packages_language( $package_ids, $to_lang );
