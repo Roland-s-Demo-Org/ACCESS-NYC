@@ -6125,7 +6125,7 @@ function apache_mod_loaded( $mod, $default_value = false ) {
 		&& ! str_contains( ini_get( 'disable_functions' ), 'phpinfo' )
 	) {
 		ob_start();
-		phpinfo( INFO_MODULES );
+		
 		$phpinfo = ob_get_clean();
 
 		if ( str_contains( $phpinfo, $mod ) ) {
