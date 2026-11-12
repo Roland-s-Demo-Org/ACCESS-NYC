@@ -78,6 +78,7 @@
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
     "animate.scss": "0.0.6",
+    "dompurify": "3.4.17",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.13.3",

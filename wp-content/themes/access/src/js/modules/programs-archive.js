@@ -13,6 +13,7 @@
  * must be modified. That file is a Vue Component that imports this script.
  */
 
+import DOMPurify from 'dompurify';
 import Archive from '@nycopportunity/wp-archive-vue/src/archive.vue';
 
 export default {
@@ -155,6 +156,17 @@ export default {
           .filter(f => f.checked)
           .map(f => f.name)
       )].flat(2);
+    }
+  },
+
+  methods: {
+    sanitizeHtml(html) {
+      return html
+        ? DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: ['span', 'p'],
+            ALLOWED_ATTR: ['class'],
+          })
+        : '';
     }
   },
 
