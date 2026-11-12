@@ -2680,6 +2680,10 @@ class wpdb {
 			return false;
 		}
 
+		if ( ! is_string( $table ) || ! preg_match( '/^[a-zA-Z0-9_]+$/', $table ) ) {
+			return false;
+		}
+
 		$data = $this->process_fields( $table, $data, $format );
 		if ( false === $data ) {
 			return false;
@@ -2762,6 +2766,10 @@ class wpdb {
 	 */
 	public function delete( $table, $where, $where_format = null ) {
 		if ( ! is_array( $where ) ) {
+			return false;
+		}
+
+		if ( ! is_string( $table ) || ! preg_match( '/^[a-zA-Z0-9_]+$/', $table ) ) {
 			return false;
 		}
 
@@ -3674,6 +3682,10 @@ class wpdb {
 			foreach ( $queries as $column => $query ) {
 				if ( ! $query ) {
 					continue;
+				}
+
+				if ( ! preg_match( '/^[a-zA-Z0-9_]+$/', (string) $column ) ) {
+					return new WP_Error( 'wpdb_strip_invalid_text_failure', __( 'Invalid input' ) );
 				}
 
 				$sql[] = $query . " AS x_$column";
