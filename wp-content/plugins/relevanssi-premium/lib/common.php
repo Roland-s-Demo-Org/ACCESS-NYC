@@ -268,7 +268,8 @@ function relevanssi_populate_array( $matches, $blog_id = -1 ) {
 		$hundred_ids = array_splice( $ids, 0, 100 );
 		$id_list     = implode( ', ', $hundred_ids );
 		if ( ! empty( $id_list ) ) {
-			$posts = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE id IN ( $id_list )", OBJECT ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$placeholders = implode( ', ', array_fill( 0, count( $hundred_ids ), '%d' ) );
+			$posts        = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE id IN ( $placeholders )", array_values( $hundred_ids ) ), OBJECT ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 			foreach ( $posts as $post ) {
 				$cache_id = $blog_id . '|' . $post->ID;

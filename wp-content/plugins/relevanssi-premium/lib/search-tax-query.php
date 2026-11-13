@@ -399,17 +399,32 @@ function relevanssi_term_tax_id_from_row( array $row ): array {
 	$term_tax_id     = array();
 
 	if ( ! empty( $numeric_terms ) ) {
-		$type    = 'term_id';
-		$term_in = $numeric_terms;
+		$type     = 'term_id';
+		$safe_ids = array();
+		foreach ( explode( ',', $numeric_terms ) as $numeric_term ) {
+			$safe_ids[] = (int) $numeric_term;
+		}
+		$term_in = implode( ',', $safe_ids );
 	}
 
 	if ( ! empty( $term_in ) ) {
 		$row_taxonomy = sanitize_text_field( $row['taxonomy'] );
 
-		$tt_q = "SELECT tt.term_taxonomy_id
+		if ( 'name' === $type ) {
+			$type_column = 'name';
+		} elseif ( 'slug' === $type ) {
+			$type_column = 'slug';
+		} else {
+			$type_column = 'term_id';
+		}
+
+		$tt_q = $wpdb->prepare(
+			"SELECT tt.term_taxonomy_id
 				  FROM $wpdb->term_taxonomy AS tt
 				  LEFT JOIN $wpdb->terms AS t ON (tt.term_id=t.term_id)
-				  WHERE tt.taxonomy = '$row_taxonomy' AND t.$type IN ($term_in)";
+				  WHERE tt.taxonomy = %s AND t.$type_column IN (", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$row_taxonomy
+		) . $term_in . ')';
 		// Clean: $row_taxonomy is sanitized, each term in $term_in is sanitized.
 		$term_tax_id = $wpdb->get_col( $tt_q ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}

@@ -1828,7 +1828,11 @@ function relevanssi_add_include_matches( array &$matches, array $included_posts,
 			$total_ids    = count( $added_post_ids );
 			do {
 				$current_slice   = array_slice( $added_post_ids, $offset, $slice_length );
-				$post_ids_to_add = implode( ',', $current_slice );
+				$safe_slice      = array();
+				foreach ( $current_slice as $slice_id ) {
+					$safe_slice[] = (int) $slice_id;
+				}
+				$post_ids_to_add = implode( ',', $safe_slice );
 				if ( ! empty( $post_ids_to_add ) ) {
 					$query = "SELECT relevanssi.*, relevanssi.title * $title_boost +
 					relevanssi.content * $content_boost + relevanssi.comment * $comment_boost +
@@ -1854,7 +1858,11 @@ function relevanssi_add_include_matches( array &$matches, array $included_posts,
 			}
 		}
 		$existing_items = array_keys( array_flip( $existing_items ) );
-		$items_to_add   = implode( ',', array_diff( array_keys( $included_posts['items'] ), $existing_items ) );
+		$safe_items     = array();
+		foreach ( array_diff( array_keys( $included_posts['items'] ), $existing_items ) as $item_id ) {
+			$safe_items[] = (int) $item_id;
+		}
+		$items_to_add = implode( ',', $safe_items );
 
 		if ( ! empty( $items_to_add ) ) {
 			$query = "SELECT relevanssi.*, relevanssi.title * $title_boost +

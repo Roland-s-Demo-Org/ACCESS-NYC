@@ -854,6 +854,7 @@ function relevanssi_publish( $post_id, $bypass_global_post = false ) {
  */
 function relevanssi_insert_edit( $post_id ) {
 	global $wpdb;
+	$post_id = (int) $post_id;
 	if ( 'revision' === relevanssi_get_post_type( $post_id ) ) {
 		return 'revision';
 	}
