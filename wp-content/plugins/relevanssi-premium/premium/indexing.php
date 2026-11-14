@@ -1785,9 +1785,12 @@ function relevanssi_delete_post_type_object( $post_type ) {
 	$id = relevanssi_get_post_type_by_name( $post_type );
 	if ( $id ) {
 		$wpdb->query(
-			'DELETE FROM ' .
-			$relevanssi_variables['relevanssi_table'] . " WHERE item = $id " . // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-			"AND type = 'post_type'"
+			$wpdb->prepare(
+				'DELETE FROM ' .
+				$relevanssi_variables['relevanssi_table'] . " WHERE item = %d " . // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				"AND type = 'post_type'",
+				$id
+			)
 		);
 	}
 }

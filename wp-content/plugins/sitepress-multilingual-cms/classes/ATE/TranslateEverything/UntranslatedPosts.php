@@ -27,7 +27,7 @@ class UntranslatedPosts {
 			return [];
 		}
 
-		$languagesPart      = Lst::join( ' UNION ALL ', Fns::map( Str::replace( '__', Fns::__, "SELECT '__' AS code" ), $secondaryLanguages ) );
+		$languagesPart      = implode( ' UNION ALL ', array_fill( 0, count( $secondaryLanguages ), 'SELECT %s AS code' ) );
 		$acceptableStatuses = ICL_TM_NOT_TRANSLATED . ', ' . ICL_TM_ATE_CANCELLED;
 
 		$sql = "
@@ -53,10 +53,15 @@ class UntranslatedPosts {
 
 		$result = $wpdb->get_results( $wpdb->prepare(
 			$sql,
-			\WPML_TM_Post_Edit_TM_Editor_Mode::POST_META_KEY_USE_NATIVE,
-			'post_' . $postType,
-			Languages::getDefaultCode(),
-			$queueSize
+			array_merge(
+				array_values( $secondaryLanguages ),
+				[
+					\WPML_TM_Post_Edit_TM_Editor_Mode::POST_META_KEY_USE_NATIVE,
+					'post_' . $postType,
+					Languages::getDefaultCode(),
+					$queueSize,
+				]
+			)
 		), ARRAY_N );
 
 		return Fns::map( Obj::evolve( [ 0 => Cast::toInt() ] ), $result );
