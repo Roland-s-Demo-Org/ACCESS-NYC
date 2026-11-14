@@ -563,12 +563,14 @@ function relevanssi_get_post_meta_for_all_posts( array $post_ids, string $field 
 	$meta_values     = array();
 
 	if ( $post_ids_string ) {
-		$meta_values = $wpdb->get_results(
+		$post_ids_placeholders = implode( ', ', array_fill( 0, count( $post_ids ), '%d' ) );
+		$query_params          = array_merge( array( $field ), array_values( $post_ids ) );
+		$meta_values           = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT post_id, meta_value FROM $wpdb->postmeta
                 WHERE meta_key = %s
-				AND post_id IN ( $post_ids_string )", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQL.NotPrepared
-				$field
+				AND post_id IN ( $post_ids_placeholders )", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQL.NotPrepared
+				$query_params
 			)
 		);
 	}
